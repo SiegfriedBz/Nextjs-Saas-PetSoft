@@ -18,11 +18,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`text-base text-zinc-900 bg-gradient-to-r from-zinc-200 to-zinc-50 ${josefinSans.className}`}
+        className={`text-base grid grid-rows-[1fr_max-content] text-zinc-900 bg-gradient-to-r from-zinc-200 to-zinc-50 ${josefinSans.className}`}
       >
-        <Footer />
-        <main className='min-h-[100svh]'> {children}</main>
-        <Footer />
+        <main className='min-h-[100svh]'>{children}</main>
       </body>
     </html>
   )
