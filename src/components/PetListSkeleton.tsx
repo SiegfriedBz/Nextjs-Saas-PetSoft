@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export const PetListSkeleton = () => {
   return (
-    <ul className='max-md:h-[22svh] md:h-[56svh] flex flex-col items-center overflow-y-scroll'>
+    <ul className='max-md:h-[22svh] md:h-full flex flex-col items-center overflow-y-scroll rounded-md'>
       {Array.from({ length: 4 }, (_, id) => {
         return (
           <li
