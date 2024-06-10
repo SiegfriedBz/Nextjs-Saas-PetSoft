@@ -16,10 +16,13 @@ export default function AppLayout({
 }>) {
   return (
     <>
+      {/* Server-Component */}
       <BackgroundPattern />
       <main className='container flex flex-col mx-auto min-h-[100svh]'>
+        {/* Client-Component */}
         <AppHeader />
-        <div className='pt-12 w-full max-w-5xl mx-auto'>{children}</div>
+        <div className='pt-12 w-full h-full max-w-5xl mx-auto'>{children}</div>
+        {/* Server-Component */}
         <AppFooter />
       </main>
     </>
