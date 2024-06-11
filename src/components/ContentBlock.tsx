@@ -1,11 +1,11 @@
 import { twMerge } from 'tailwind-merge'
 
 type TProps = {
-  children: React.ReactNode
   className?: string
+  children: React.ReactNode
 }
 
-const ContentBlock = ({ children, className }: TProps) => {
+const ContentBlock = ({ className, children }: TProps) => {
   return (
     <div
       className={twMerge(
