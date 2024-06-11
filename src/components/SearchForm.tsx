@@ -1,9 +1,9 @@
 'use client'
 
-import usePets from '@/hooks/usePets'
+import usePetsContext from '@/hooks/usePetsContext'
 
 const SearchForm = () => {
-  const { petQuery, setPetQuery } = usePets()
+  const { petQuery, handleSetPetQuery } = usePetsContext()
 
   return (
     <form className='w-full h-full'>
@@ -25,7 +25,7 @@ const SearchForm = () => {
         placeholder='Search'
         type='search'
         value={petQuery}
-        onChange={(e) => setPetQuery(e.target.value)}
+        onChange={handleSetPetQuery}
       />
     </form>
   )
