@@ -1,4 +1,5 @@
 import ContentBlock from '@/components/ContentBlock'
+import PetActionButton from '@/components/PetActionButton'
 import PetDetails from '@/components/PetDetails'
 import PetList from '@/components/PetList'
 import SearchForm from '@/components/SearchForm'
@@ -23,17 +24,21 @@ const DashboardContentWrapper = async () => {
   const petsData = await getData()
 
   return (
-    // Client-Component
     <PetsProvider petsData={petsData}>
       <div className='grid max-md:grid-cols-1 md:grid-cols-[16rem_1fr] md:space-x-4 md:min-h-[62svh]'>
         <section className='grid md:grid-rows-[2rem_1fr] max-md:space-y-2 md:h-full'>
           {/* Client-Component */}
           <SearchForm />
-          <ContentBlock className='mt-4 ring-1 ring-white overflow-hidden'>
+          <ContentBlock className='relative mt-4 ring-1 ring-white overflow-hidden'>
             {/* Client-Component */}
             <PetList />
+            <PetActionButton
+              actionType='create'
+              className='z-[50] absolute max-md:bottom-1 max-md:right-2 md:bottom-4 md:right-4'
+            />
           </ContentBlock>
         </section>
+
         <section className='max-md:min-h-[38svh] max-md:my-8 md:h-[calc(100%+1rem)]'>
           <ContentBlock className='ring-1 ring-white overflow-hidden'>
             {/* Client-Component */}
