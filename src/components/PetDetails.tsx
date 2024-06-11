@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import usePets from '@/hooks/usePets'
-import { TPet } from '@/types/pet.types'
+import PetActionButton from '@/components/PetActionButton'
+import usePetsContext from '@/hooks/usePetsContext'
+import type { TPet } from '@/types/pet.types'
 import { PhoneIcon } from '@heroicons/react/24/outline'
 import {
   ArrowRightEndOnRectangleIcon,
@@ -12,27 +12,24 @@ import {
 import Image from 'next/image'
 
 const PetDetails = () => {
-  const { selectedPet } = usePets()
+  const { pets, selectedPet } = usePetsContext()
+
+  if (!selectedPet || !pets?.find((p) => p.id === selectedPet?.id))
+    return <EmptyView />
 
   return (
-    <>
-      {selectedPet ? (
-        <div className='h-full w-full flex flex-col max-md:mb-16'>
-          {/* Header */}
-          <Header selectedPet={selectedPet} />
+    <div className='h-full w-full flex flex-col max-md:mb-16'>
+      {/* Header */}
+      <Header selectedPet={selectedPet} />
 
-          {/* Body */}
-          <div className='mt-4 flex flex-col h-full space-y-8 bg-zinc-200/60 p-4 pb-0'>
-            <Owner selectedPet={selectedPet} />
-            <Pet selectedPet={selectedPet} />
-            <Dates selectedPet={selectedPet} />
-            <Notes selectedPet={selectedPet} />
-          </div>
-        </div>
-      ) : (
-        <EmptyView />
-      )}
-    </>
+      {/* Body */}
+      <div className='mt-4 flex flex-col h-full space-y-8 bg-zinc-200/60 p-4 pb-0'>
+        <Owner selectedPet={selectedPet} />
+        <Pet selectedPet={selectedPet} />
+        <Dates selectedPet={selectedPet} />
+        <Notes selectedPet={selectedPet} />
+      </div>
+    </div>
   )
 }
 
@@ -56,8 +53,12 @@ const Header = ({ selectedPet }: TProps) => {
         <p className='text-xl '>{selectedPet.name}</p>
       </div>
       <div className='flex ms-auto items-center gap-x-4'>
-        <Button variant='secondary'>Edit</Button>
-        <Button variant='secondary'>Checkout</Button>
+        <PetActionButton selectedPet={selectedPet} actionType='edit'>
+          Edit
+        </PetActionButton>
+        <PetActionButton selectedPet={selectedPet} actionType='checkout'>
+          Checkout
+        </PetActionButton>
       </div>
     </div>
   )
