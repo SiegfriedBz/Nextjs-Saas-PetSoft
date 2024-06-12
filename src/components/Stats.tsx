@@ -1,15 +1,9 @@
+import { getPets } from '@/services/getPets.service'
 import { TPet } from '@/types/pet.types'
 
 const getData = async () => {
-  const response = await fetch(
-    'https://bytegrad.com/course-assets/projects/petsoft/api/pets'
-  )
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch pets data')
-  }
-
-  const petsData: TPet[] = await response.json()
+  const petsData: TPet[] = await getPets()
+  console.log('petsData', petsData)
 
   return petsData
 }
