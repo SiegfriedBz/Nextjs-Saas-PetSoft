@@ -2,6 +2,8 @@
 
 TODO.text
 
+dev.db
+.env
 # dependencies
 /node_modules
 /.pnp
