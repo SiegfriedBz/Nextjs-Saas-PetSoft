@@ -4,6 +4,7 @@ import { useFilteredPets } from '@/hooks/useFilteredPets'
 import { useOptimisticPets } from '@/hooks/useOptimisticPets'
 import { useSelectPet } from '@/hooks/useSelectPet'
 import type { TPet } from '@/types/pet.types'
+import type { TCreatePetInput, TUpdatePetInput } from '@/zod/mutatePet.zod'
 import { createContext } from 'react'
 
 export type TPetsContext = {
@@ -15,9 +16,9 @@ export type TPetsContext = {
   petQuery: string
   handleSetPetQuery: (e: React.ChangeEvent<HTMLInputElement>) => void
   //
-  handleAddPet: (pet: TPet) => void
-  handleEditPet: (pet: TPet) => void
-  handleCheckoutPet: (pet: TPet) => void
+  handleAddPet: (createPetInput: TCreatePetInput) => Promise<void>
+  handleUpdatePet: (updatePetInput: TUpdatePetInput) => Promise<void>
+  handleDeletePet: (petId: TPet['id']) => Promise<void>
 }
 export const PetsContext = createContext<TPetsContext | null>(null)
 
@@ -37,14 +38,11 @@ const PetsProvider = ({ petsData, children }: TProps) => {
   })
 
   // optimistic pets & server-actions
-  const { optimisticPets, handleAddPet, handleEditPet, handleCheckoutPet } =
+  const { optimisticPets, handleAddPet, handleUpdatePet, handleDeletePet } =
     useOptimisticPets({
       pets,
       handleSelectPet
     })
-
-  console.log('optimisticPets', optimisticPets)
-  console.log('pets', pets)
 
   return (
     <PetsContext.Provider
@@ -58,8 +56,8 @@ const PetsProvider = ({ petsData, children }: TProps) => {
         //
         pets: optimisticPets,
         handleAddPet,
-        handleEditPet,
-        handleCheckoutPet
+        handleUpdatePet,
+        handleDeletePet
       }}
     >
       {children}
