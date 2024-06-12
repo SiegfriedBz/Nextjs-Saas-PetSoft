@@ -1,15 +1,24 @@
 'use client'
 
+import { useFilteredPets } from '@/hooks/useFilteredPets'
+import { useOptimisticPets } from '@/hooks/useOptimisticPets'
+import { useSelectPet } from '@/hooks/useSelectPet'
 import type { TPet } from '@/types/pet.types'
-import { createContext, useCallback, useEffect, useState } from 'react'
+import type { TCreatePetInput, TUpdatePetInput } from '@/zod/mutatePet.zod'
+import { createContext } from 'react'
 
 export type TPetsContext = {
   pets: TPet[]
-  selectedPetId?: string
+  //
   selectedPet: TPet | undefined
-  handleSelectPetId: (id: string) => void
+  handleSelectPet: (id: string) => void
+  //
   petQuery: string
-  setPetQuery: React.Dispatch<React.SetStateAction<string>>
+  handleSetPetQuery: (e: React.ChangeEvent<HTMLInputElement>) => void
+  //
+  handleAddPet: (createPetInput: TCreatePetInput) => Promise<void>
+  handleUpdatePet: (updatePetInput: TUpdatePetInput) => Promise<void>
+  handleDeletePet: (petId: TPet['id']) => Promise<void>
 }
 export const PetsContext = createContext<TPetsContext | null>(null)
 
@@ -18,45 +27,37 @@ type TProps = {
   children: React.ReactNode
 }
 const PetsProvider = ({ petsData, children }: TProps) => {
-  const [pets, setPets] = useState<TPet[]>(() => {
-    return petsData || []
+  // init & search pets
+  const { pets, petQuery, handleSetPetQuery } = useFilteredPets({
+    petsData
   })
-  // select a pet
-  const [selectedPetId, setSelectedPetId] = useState('')
-  const selectedPet = pets.find((pet) => pet.id === selectedPetId)
 
-  // search pets
-  const [petQuery, setPetQuery] = useState('')
-  const getFilteredPets = useCallback(() => {
-    return petsData.filter((pet) =>
-      !petQuery ? pet : pet.name.toLowerCase().includes(petQuery?.toLowerCase())
-    )
-  }, [petQuery, petsData])
+  // select pet
+  const { selectedPet, handleSelectPet } = useSelectPet({
+    pets
+  })
 
-  // update pets when petsData changes
-  useEffect(() => {
-    setPets(petsData)
-  }, [petsData])
-
-  // update pets when petQuery changes
-  useEffect(() => {
-    const filteredPets = getFilteredPets()
-    setPets(filteredPets)
-  }, [getFilteredPets])
-
-  const handleSelectPetId = (id: string) => {
-    setSelectedPetId(id)
-  }
+  // optimistic pets & server-actions
+  const { optimisticPets, handleAddPet, handleUpdatePet, handleDeletePet } =
+    useOptimisticPets({
+      pets,
+      handleSelectPet
+    })
 
   return (
     <PetsContext.Provider
       value={{
-        pets,
-        selectedPetId,
+        //
         selectedPet,
-        handleSelectPetId,
+        handleSelectPet,
+        //
         petQuery,
-        setPetQuery
+        handleSetPetQuery,
+        //
+        pets: optimisticPets,
+        handleAddPet,
+        handleUpdatePet,
+        handleDeletePet
       }}
     >
       {children}
