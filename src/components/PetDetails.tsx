@@ -1,6 +1,8 @@
 'use client'
 
-import PetActionButton from '@/components/PetActionButton'
+import petDefaultImg from '@/app/pet-default.png'
+import MutatePetDialog from '@/components/MutatePetDialog'
+import PetCheckOutActionButton from '@/components/PetCheckOutActionButton'
 import usePetsContext from '@/hooks/usePetsContext'
 import type { TPet } from '@/types/pet.types'
 import { PhoneIcon } from '@heroicons/react/24/outline'
@@ -23,7 +25,7 @@ const PetDetails = () => {
       <Header selectedPet={selectedPet} />
 
       {/* Body */}
-      <div className='mt-4 flex flex-col h-full space-y-8 bg-zinc-200/60 p-4 pb-0'>
+      <div className='mt-4 flex flex-col h-full space-y-8 bg-zinc-200/60 px-4'>
         <Owner selectedPet={selectedPet} />
         <Pet selectedPet={selectedPet} />
         <Dates selectedPet={selectedPet} />
@@ -40,25 +42,24 @@ type TProps = {
 }
 const Header = ({ selectedPet }: TProps) => {
   return (
-    <div className='flex items-center p-4'>
-      <div className='flex items-center gap-x-8'>
+    <div className='flex items-center max-md:px-8 max-md:py-4 md:p-4 max-md:gap-x-2'>
+      <div className='flex items-center max-md:gap-x-2 md:gap-x-8'>
         <div className='relative rounded-full h-16 w-16 overflow-hidden'>
           <Image
-            src={selectedPet.imageUrl}
+            src={selectedPet?.imageUrl || petDefaultImg}
             alt={`${selectedPet.name}`}
             fill
             className='rounded-full object-cover object-bottom'
           />
         </div>
+
         <p className='text-xl '>{selectedPet.name}</p>
       </div>
       <div className='flex ms-auto items-center gap-x-4'>
-        <PetActionButton selectedPet={selectedPet} actionType='edit'>
-          Edit
-        </PetActionButton>
-        <PetActionButton selectedPet={selectedPet} actionType='checkout'>
+        <MutatePetDialog actionType='editPet' selectedPet={selectedPet} />
+        <PetCheckOutActionButton selectedPetId={selectedPet.id}>
           Checkout
-        </PetActionButton>
+        </PetCheckOutActionButton>
       </div>
     </div>
   )
@@ -66,7 +67,7 @@ const Header = ({ selectedPet }: TProps) => {
 
 const Owner = ({ selectedPet }: TProps) => {
   return (
-    <div className='grid grid-cols-[1fr_4fr]'>
+    <div className='grid grid-cols-[1fr_4fr] py-4'>
       <p className='text-lg uppercase'>Owner</p>
       <div className='flex justify-around'>
         <p className='text-center'>{selectedPet.ownerName}</p>
@@ -104,13 +105,11 @@ const Dates = ({ selectedPet }: TProps) => {
       <div className='flex justify-around'>
         <p className='justify-center flex items-center space-x-2'>
           <ArrowRightStartOnRectangleIcon className='h-5 w-5 currentColor' />
-          {/* {new Date(selectedPet.checkinDate).toLocaleDateString()} */}
-          <span>{new Date().toLocaleDateString()}</span>
+          {selectedPet?.checkInDate?.toLocaleDateString()}
         </p>
         <p className='justify-center flex items-center space-x-2'>
           <ArrowRightEndOnRectangleIcon className='h-5 w-5 currentColor' />
-          {/* {new Date(selectedPet.checkOutDate).toLocaleDateString()} */}
-          <span>{new Date().toLocaleDateString()}</span>
+          {selectedPet?.checkOutDate?.toLocaleDateString()}
         </p>
       </div>
     </div>
@@ -119,7 +118,7 @@ const Dates = ({ selectedPet }: TProps) => {
 
 const Notes = ({ selectedPet }: TProps) => {
   return (
-    <div className='bg-zinc-50 rounded-t-md flex-1 px-4 pt-8'>
+    <div className='bg-zinc-50 rounded-t-md flex-1 px-4 pt-8 pb-4'>
       <p>{selectedPet.notes}</p>
     </div>
   )

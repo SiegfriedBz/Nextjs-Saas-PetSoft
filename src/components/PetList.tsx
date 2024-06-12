@@ -1,13 +1,15 @@
 'use client'
 
+import petDefaultImg from '@/app/pet-default.png'
 import usePetsContext from '@/hooks/usePetsContext'
 import Image from 'next/image'
+import { twMerge } from 'tailwind-merge'
 
 const PetList = () => {
   const { pets, selectedPet, handleSelectPet } = usePetsContext()
 
   return (
-    <ul className='max-md:h-[32svh] md:h-full flex flex-col items-center overflow-y-scroll rounded-md'>
+    <ul className='max-md:h-[32svh] md:h-[54svh] flex flex-col items-center overflow-y-scroll rounded-md'>
       {pets.map((pet) => {
         const {
           id,
@@ -20,14 +22,16 @@ const PetList = () => {
         return (
           <li
             key={id}
-            className={`group w-full 
+            className={twMerge(
+              `group w-full 
                 max-md:px-8 max-md:py-4 md:p-4
                 hover:text-zinc-500 
                 hover:bg-zinc-200/60
-                ${selectedPet?.id === id ? 'text-zinc-500 bg-zinc-200/60' : ''}
                 border-b border-b-zinc-200 
                 transition-colors duration-300
-              `}
+              `,
+              `${selectedPet?.id === id ? 'text-zinc-500 bg-zinc-200/60' : ''}`
+            )}
           >
             <button
               type='button'
@@ -36,7 +40,7 @@ const PetList = () => {
             >
               <div className='relative rounded-full h-16 w-16 overflow-hidden'>
                 <Image
-                  src={imageUrl}
+                  src={imageUrl || petDefaultImg}
                   alt={`${name} the 
 
                     `}
