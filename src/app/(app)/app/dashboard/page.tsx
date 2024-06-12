@@ -7,7 +7,7 @@ import { Suspense } from 'react'
 
 const Dashboard = () => {
   return (
-    <main className='space-y-4'>
+    <main className='space-y-4 h-full'>
       <div className='flex justify-between items-center text-zinc-50'>
         {/* Server-Component */}
         <Branding />
