@@ -28,6 +28,7 @@ export const config = {
     Credentials({
       /** runs on login */
       async authorize(credentials) {
+        // validate credentials
         const parsedCredentials = loginZodSchema.safeParse(credentials)
 
         if (parsedCredentials.success) {
