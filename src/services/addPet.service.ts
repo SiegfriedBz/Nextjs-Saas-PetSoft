@@ -1,8 +1,20 @@
 import prisma from '@/lib/db'
-import type { TCreatePetInput } from '@/zod/mutatePet.zod'
+import type { TMutatePetInput } from '@/zod/mutatePet.zod'
 
-export const addPet = async (pet: TCreatePetInput) => {
-  const newPet = await prisma.pet.create({ data: pet })
+export const addPet = async ({
+  petData,
+  currentUserId
+}: {
+  petData: TMutatePetInput
+  currentUserId: string
+}) => {
+  try {
+    const newPet = await prisma.pet.create({
+      data: { ...petData, User: { connect: { id: currentUserId } } }
+    })
 
-  return newPet
+    return newPet
+  } catch (error) {
+    throw new Error('Failed to add pet.')
+  }
 }
