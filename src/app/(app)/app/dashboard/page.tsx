@@ -1,28 +1,45 @@
 import Branding from '@/components/Branding'
-import DashboardContentWrapper from '@/components/DashboardContentWrapper'
-import DashboardContentWrapperSkeleton from '@/components/DashboardContentWrapperSkeleton'
+import DashboardContent from '@/components/DashboardContent'
 import Stats from '@/components/Stats'
-import StatsSkeleton from '@/components/StatsSkeleton'
-import { Suspense } from 'react'
+import PetsProvider from '@/context/PetsProvider'
+import { auth } from '@/lib/auth'
+import getDataPetsByUser from '@/server-getData/getDataPetsByUser'
+import { TPetEssentials } from '@/types/pet.types'
+import { redirect } from 'next/navigation'
 
-const Dashboard = () => {
+const getData = async () => {
+  // Authentication check
+  const session = await auth()
+  const currentUserId = session?.user?.userId
+
+  if (!currentUserId) {
+    return redirect('/login')
+  }
+
+  // Get pets belonging to the current user
+  const petsData: TPetEssentials[] = await getDataPetsByUser({
+    userId: currentUserId
+  })
+
+  return petsData
+}
+
+const Dashboard = async () => {
+  const petsData = await getData()
+
   return (
-    <main className='space-y-4 h-full'>
-      <div className='flex justify-between items-center text-zinc-50'>
-        {/* Server-Component */}
-        <Branding />
-
-        <Suspense fallback={<StatsSkeleton />}>
+    <PetsProvider petsData={petsData}>
+      <main className='space-y-4 h-full'>
+        <div className='flex justify-between items-center text-zinc-50'>
           {/* Server-Component */}
+          <Branding />
+          {/* Client-Component */}
           <Stats />
-        </Suspense>
-      </div>
-
-      <Suspense fallback={<DashboardContentWrapperSkeleton />}>
+        </div>
         {/* Server-Component */}
-        <DashboardContentWrapper />
-      </Suspense>
-    </main>
+        <DashboardContent />
+      </main>
+    </PetsProvider>
   )
 }
 

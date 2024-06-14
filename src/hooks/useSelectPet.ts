@@ -1,7 +1,7 @@
-import { TPet } from '@/types/pet.types'
+import { TPetEssentials } from '@/types/pet.types'
 import { useState } from 'react'
 
-export const useSelectPet = ({ pets }: { pets: TPet[] }) => {
+export const useSelectPet = ({ pets }: { pets: TPetEssentials[] }) => {
   const [selectedPetId, setSelectedPetId] = useState('')
   const selectedPet = pets.find((pet) => pet.id === selectedPetId)
 

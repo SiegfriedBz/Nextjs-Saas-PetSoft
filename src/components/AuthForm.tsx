@@ -13,6 +13,7 @@ import {
   type TSignupInput
 } from '@/zod/auth.zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useFormStatus } from 'react-dom'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -35,13 +36,11 @@ const AuthForm = ({ actionType }: TProps) => {
 
   const action: () => void = handleSubmit(async (data) => {
     try {
-      if (isLoginForm) {
-        await userLoginAction(data as TLoginInput)
-      }
-
-      if (!isLoginForm) {
-        await userSignupAction(data as TSignupInput)
-      }
+      toast.info(`${isLoginForm ? 'Logging in...' : 'Signing up...'}`)
+      isLoginForm
+        ? await userLoginAction(data as TLoginInput)
+        : await userSignupAction(data as TSignupInput)
+      toast.success(`${isLoginForm ? 'Logged in' : 'Signed up'} successfully`)
     } catch (error) {
       const err = error as Error
       return toast.error(`Failed to ${actionType} - ${err.message}.`)
@@ -117,11 +116,23 @@ const AuthForm = ({ actionType }: TProps) => {
         )}
       </div>
 
-      <Button className='mt-2 text-center w-full uppercase' type='submit'>
-        {actionType}
-      </Button>
+      <SubmitButton actionType={actionType} />
     </form>
   )
 }
 
 export default AuthForm
+
+const SubmitButton = ({ actionType }: TProps) => {
+  const { pending } = useFormStatus()
+
+  return (
+    <Button
+      disabled={pending}
+      className='mt-2 text-center w-full uppercase'
+      type='submit'
+    >
+      {actionType}
+    </Button>
+  )
+}

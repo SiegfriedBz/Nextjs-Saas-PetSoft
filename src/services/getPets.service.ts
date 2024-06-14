@@ -1,7 +1,11 @@
 import prisma from '@/lib/db'
 
 export async function getPets() {
-  const pets = await prisma.pet.findMany()
+  try {
+    const pets = await prisma.pet.findMany()
 
-  return pets
+    return pets
+  } catch (error) {
+    throw new Error('Failed to fetch pets.')
+  }
 }

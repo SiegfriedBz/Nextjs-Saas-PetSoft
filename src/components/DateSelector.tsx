@@ -14,7 +14,6 @@ const DateSelector = ({ range, setRange }: TDateSelectorProps) => {
       mode='range'
       className='mx-auto place-content-center'
       onSelect={(range) => {
-        console.log('=== DateSelector range', range)
         range?.from && setRange({ from: range.from, to: range.to })
       }}
       selected={range}

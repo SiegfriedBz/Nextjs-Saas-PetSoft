@@ -7,20 +7,16 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import usePetsContext from '@/hooks/usePetsContext'
-import { TPet } from '@/types/pet.types'
-import {
-  createPetSchema,
-  editPetSchema,
-  type TCreatePetInput,
-  type TUpdatePetInput
-} from '@/zod/mutatePet.zod'
+import { TPetEssentials } from '@/types/pet.types'
+import { mutatePetSchema, type TMutatePetInput } from '@/zod/mutatePet.zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState, useTransition } from 'react'
 import { DateRange } from 'react-day-picker'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 type TProps = {
-  selectedPet?: TPet
+  selectedPet?: TPetEssentials
   closeDialog: () => void
 }
 const MutatePetForm = ({ selectedPet, closeDialog }: TProps) => {
@@ -30,15 +26,13 @@ const MutatePetForm = ({ selectedPet, closeDialog }: TProps) => {
     to: undefined
   })
 
-  const zodSchema = isEditForm ? editPetSchema : createPetSchema
-  type TInput = TCreatePetInput | TUpdatePetInput
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue
-  } = useForm<TInput>({
-    resolver: zodResolver(zodSchema)
+  } = useForm<TMutatePetInput>({
+    resolver: zodResolver(mutatePetSchema)
   })
 
   const [isPending, startTransition] = useTransition()
@@ -61,7 +55,7 @@ const MutatePetForm = ({ selectedPet, closeDialog }: TProps) => {
           to: selectedPet.checkOutDate ?? undefined
         })
       } else {
-        setValue(key as keyof TCreatePetInput, value ?? '')
+        setValue(key as keyof TMutatePetInput, value ?? '')
       }
     })
   }, [isEditForm, selectedPet, setValue])
@@ -76,7 +70,6 @@ const MutatePetForm = ({ selectedPet, closeDialog }: TProps) => {
 
   // on submit form
   const action: () => void = handleSubmit((data) => {
-    console.log('data', data)
     // add pet default img if not provided by user
     if (!data?.imageUrl) {
       data.imageUrl =
@@ -89,8 +82,12 @@ const MutatePetForm = ({ selectedPet, closeDialog }: TProps) => {
     // optimistic update + server-actions
     startTransition(() => {
       isEditForm
-        ? handleUpdatePet(data as TUpdatePetInput)
-        : handleAddPet(data as TCreatePetInput)
+        ? handleUpdatePet(data as TMutatePetInput).catch((err: Error) =>
+            toast.error(`Failed to edit pet - ${err.message}.`)
+          )
+        : handleAddPet(data as TMutatePetInput).catch((err: Error) =>
+            toast.error(`Failed to create pet - ${err.message}.`)
+          )
     })
   })
 
@@ -99,6 +96,7 @@ const MutatePetForm = ({ selectedPet, closeDialog }: TProps) => {
       action={action}
       className='w-full max-md:space-y-6 space-y-4 overflow-y-scroll max-h-[75svh]'
     >
+      {/* id of the pet */}
       {isEditForm && <input type='hidden' {...register('id')} />}
 
       <div className='px-1'>

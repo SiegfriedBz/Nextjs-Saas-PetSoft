@@ -1,22 +1,37 @@
 'use server'
 
 import { addPet } from '@/services/addPet.service'
-import type { TCreatePetInput } from '@/zod/mutatePet.zod'
+import { checkAuth } from '@/server-utils/server.utils'
+import { mutatePetSchema, type TMutatePetInput } from '@/zod/mutatePet.zod'
 import { revalidatePath } from 'next/cache'
+import { Pet } from '@prisma/client'
 
-const wait = (duration: number) =>
-  new Promise((res) => {
-    setTimeout(res, duration)
-  })
-export async function addPetAction(pet: TCreatePetInput) {
+export async function addPetAction(
+  createPetInput: TMutatePetInput
+): Promise<Pet | Error> {
   try {
-    await wait(5000)
-    const newPet = await addPet(pet)
+    // Authentication check
+    const session = await checkAuth()
+    const currentUserId = session?.user?.userId
+
+    // Data validation
+    const parsedInput = mutatePetSchema.safeParse(createPetInput)
+
+    if (parsedInput.error) {
+      throw new Error('Invalid input. Could not add pet.')
+    }
+
+    // Data mutation with service
+    const newPet = await addPet({
+      petData: parsedInput.data,
+      currentUserId: currentUserId
+    })
 
     revalidatePath('/app/dashboard')
 
     return newPet
   } catch (error) {
-    return error
+    const err = error as Error
+    return err
   }
 }

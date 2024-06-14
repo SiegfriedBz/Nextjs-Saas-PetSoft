@@ -2,7 +2,7 @@ import z from 'zod'
 
 const currentDate = new Date()
 
-const baseSchema = z.object({
+const mutatePetSchema = z.object({
   name: z.string().trim().min(1, { message: 'Name is required' }),
   imageUrl: z.union([
     z.literal(''),
@@ -26,25 +26,18 @@ const baseSchema = z.object({
     .string()
     .trim()
     .min(3, { message: 'Owner phone number is required' }),
-  checkInDate: z.date({ required_error: 'Check in date is required' }),
-  checkOutDate: z.date({ required_error: 'Check out date is required' }),
-  createdAt: z.date().default(currentDate),
-  updatedAt: z.date().default(currentDate)
+  checkInDate: z.date().default(currentDate),
+  checkOutDate: z.date().default(currentDate),
+  id: z.string().default(crypto.randomUUID())
 })
+type TMutatePetInput = z.infer<typeof mutatePetSchema>
 
-const createPetSchema = baseSchema
-const editPetSchema = baseSchema.merge(
-  z.object({
-    id: z.string()
-  })
-)
-
-type TCreatePetInput = z.infer<typeof createPetSchema>
-type TUpdatePetInput = z.infer<typeof editPetSchema>
+const deletePetSchema = z.string()
+type TDeletePetInput = z.infer<typeof deletePetSchema>
 
 export {
-  createPetSchema,
-  editPetSchema,
-  type TCreatePetInput,
-  type TUpdatePetInput
+  mutatePetSchema,
+  deletePetSchema,
+  type TMutatePetInput,
+  type TDeletePetInput
 }

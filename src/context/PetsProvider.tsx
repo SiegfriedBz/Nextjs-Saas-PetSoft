@@ -3,27 +3,28 @@
 import { useFilteredPets } from '@/hooks/useFilteredPets'
 import { useOptimisticPets } from '@/hooks/useOptimisticPets'
 import { useSelectPet } from '@/hooks/useSelectPet'
-import type { TPet } from '@/types/pet.types'
-import type { TCreatePetInput, TUpdatePetInput } from '@/zod/mutatePet.zod'
+import type { TPetEssentials } from '@/types/pet.types'
+import type { TMutatePetInput } from '@/zod/mutatePet.zod'
 import { createContext } from 'react'
 
 export type TPetsContext = {
-  pets: TPet[]
+  pets: TPetEssentials[]
   //
-  selectedPet: TPet | undefined
+  selectedPet: TPetEssentials | undefined
   handleSelectPet: (id: string) => void
   //
   petQuery: string
   handleSetPetQuery: (e: React.ChangeEvent<HTMLInputElement>) => void
   //
-  handleAddPet: (createPetInput: TCreatePetInput) => Promise<void>
-  handleUpdatePet: (updatePetInput: TUpdatePetInput) => Promise<void>
-  handleDeletePet: (petId: TPet['id']) => Promise<void>
+  handleAddPet: (createPetInput: TMutatePetInput) => Promise<void>
+  handleUpdatePet: (updatePetInput: TMutatePetInput) => Promise<void>
+  handleDeletePet: (petId: TPetEssentials['id']) => Promise<void>
 }
 export const PetsContext = createContext<TPetsContext | null>(null)
 
 type TProps = {
-  petsData: TPet[]
+  petsData: TPetEssentials[]
+
   children: React.ReactNode
 }
 const PetsProvider = ({ petsData, children }: TProps) => {
