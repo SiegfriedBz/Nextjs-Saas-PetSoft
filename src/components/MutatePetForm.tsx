@@ -13,6 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState, useTransition } from 'react'
 import { DateRange } from 'react-day-picker'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 type TProps = {
   selectedPet?: TPetEssentials
@@ -79,10 +80,14 @@ const MutatePetForm = ({ selectedPet, closeDialog }: TProps) => {
     closeDialog()
 
     // optimistic update + server-actions
-    startTransition(async () => {
-      return isEditForm
-        ? await handleUpdatePet(data as TMutatePetInput)
-        : await handleAddPet(data as TMutatePetInput)
+    startTransition(() => {
+      isEditForm
+        ? handleUpdatePet(data as TMutatePetInput).catch((err: Error) =>
+            toast.error(`Failed to edit pet - ${err.message}.`)
+          )
+        : handleAddPet(data as TMutatePetInput).catch((err: Error) =>
+            toast.error(`Failed to create pet - ${err.message}.`)
+          )
     })
   })
 
