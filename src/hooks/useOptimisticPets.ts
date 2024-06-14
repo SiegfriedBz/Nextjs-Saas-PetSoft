@@ -57,7 +57,7 @@ export const useOptimisticPets = ({ pets, handleSelectPet }: TProps) => {
       if (response instanceof Error) {
         throw new Error('Failed to add pet')
       } else {
-        toast.success(`Pet ${response.name} added successfully`)
+        toast.success(`Pet ${response.name} added successfully.`)
       }
     } catch (error) {
       toast.error('Adding pet went wrong, please try again later.')
@@ -78,7 +78,7 @@ export const useOptimisticPets = ({ pets, handleSelectPet }: TProps) => {
       if (response instanceof Error) {
         throw new Error('Failed to update pet')
       } else {
-        toast.success(`Pet ${response.name} updated successfully`)
+        toast.success(`Pet ${response.name} updated successfully.`)
       }
     } catch (error) {
       toast.error('Updating pet went wrong, please try again later.')
@@ -99,7 +99,7 @@ export const useOptimisticPets = ({ pets, handleSelectPet }: TProps) => {
       if (response instanceof Error) {
         throw new Error('Failed to delete pet')
       } else {
-        toast.success(`Pet checked out successfully`)
+        toast.success(`Pet checked out successfully.`)
       }
     } catch (error) {
       toast.error('Checking out pet went wrong, please try again later.')
