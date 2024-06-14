@@ -1,9 +1,7 @@
+import AuthWrapper from '@/components/AuthWrapper'
+
 const Signup = () => {
-  return (
-    <div>
-      <h1>Signup</h1>
-    </div>
-  )
+  return <AuthWrapper actionType='signup' />
 }
 
 export default Signup

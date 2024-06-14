@@ -1,9 +1,12 @@
 'use client'
 
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
+import userLogoutAction from '@/server-actions/userLogoutAction'
 
 const SignOutButton = () => {
-  return <Button onClick={() => console.log('SIGNOUT')}>Sign Out</Button>
+  return (
+    <Button onClick={async () => await userLogoutAction()}>Sign Out</Button>
+  )
 }
 
 export default SignOutButton
