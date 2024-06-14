@@ -14,18 +14,17 @@ const userLoginAction = async (userInput: TLoginInput) => {
     }
 
     // 2. Sign in with credentials
-    await signIn('credentials', parsedInput.data, {
-      redirectTo: '/app/dashboard'
-    })
+    await signIn('credentials', parsedInput.data)
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
           return 'Invalid credentials.'
         default:
-          return 'Something went wrong.'
+          return 'Error - Could not sign in.'
       }
     }
+    // next-auth successful redirect is expected to throw an error, that we need to rethrow.
     throw error
   }
 }
