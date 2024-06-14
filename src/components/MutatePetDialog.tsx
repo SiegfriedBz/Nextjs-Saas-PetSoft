@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
-import type { TPet } from '@/types/pet.types'
+import type { TPetEssentials } from '@/types/pet.types'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
 
@@ -19,7 +19,7 @@ type TProps =
       actionType: 'createPet'
       selectedPet?: undefined
     }
-  | { actionType: 'editPet'; selectedPet: TPet }
+  | { actionType: 'editPet'; selectedPet: TPetEssentials }
 
 const MutatePetDialog = ({ actionType, selectedPet }: TProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
