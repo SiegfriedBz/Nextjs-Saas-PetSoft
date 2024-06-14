@@ -1,8 +1,12 @@
-import type { TPet } from '@/types/pet.types'
+import type { TPetEssentials } from '@/types/pet.types'
 import { useCallback, useEffect, useState } from 'react'
 
-export const useFilteredPets = ({ petsData }: { petsData: TPet[] }) => {
-  const [pets, setPets] = useState<TPet[]>(() => {
+export const useFilteredPets = ({
+  petsData
+}: {
+  petsData: TPetEssentials[]
+}) => {
+  const [pets, setPets] = useState<TPetEssentials[]>(() => {
     return petsData || []
   })
   const [petQuery, setPetQuery] = useState('')
