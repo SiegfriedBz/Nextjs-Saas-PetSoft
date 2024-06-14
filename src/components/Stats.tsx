@@ -1,16 +1,9 @@
-import { getPets } from '@/services/getPets.service'
-import { TPet } from '@/types/pet.types'
+'use client'
+import usePetsContext from '@/hooks/usePetsContext'
 
-const getData = async () => {
-  const petsData: TPet[] = await getPets()
-  console.log('petsData', petsData)
-
-  return petsData
-}
-
-const Stats = async () => {
-  const petsData = await getData()
-  const numOfPets = petsData.length || 0
+const Stats = () => {
+  const { pets } = usePetsContext()
+  const numOfPets = pets.length || 0
 
   return (
     <section className='text-center'>
