@@ -4,7 +4,7 @@ import petDefaultImg from '@/app/pet-default.png'
 import MutatePetDialog from '@/components/MutatePetDialog'
 import PetCheckOutActionButton from '@/components/PetCheckOutActionButton'
 import usePetsContext from '@/hooks/usePetsContext'
-import type { TPet } from '@/types/pet.types'
+import type { TPetEssentials } from '@/types/pet.types'
 import { PhoneIcon } from '@heroicons/react/24/outline'
 import {
   ArrowRightEndOnRectangleIcon,
@@ -38,7 +38,7 @@ const PetDetails = () => {
 export default PetDetails
 
 type TProps = {
-  selectedPet: TPet
+  selectedPet: TPetEssentials
 }
 const Header = ({ selectedPet }: TProps) => {
   return (

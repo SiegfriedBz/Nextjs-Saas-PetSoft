@@ -2,12 +2,12 @@
 
 import { Button } from '@/components/ui/button'
 import usePetsContext from '@/hooks/usePetsContext'
-import type { TPet } from '@/types/pet.types'
+import type { TPetEssentials } from '@/types/pet.types'
 import { useTransition } from 'react'
 
 type TProps = {
   className?: string
-  selectedPetId?: TPet['id']
+  selectedPetId?: TPetEssentials['id']
   children?: React.ReactNode
 }
 const PetCheckOutActionButton = ({
@@ -20,7 +20,7 @@ const PetCheckOutActionButton = ({
 
   const onCheckout = () => {
     startTransition(() => {
-      handleDeletePet(selectedPetId as TPet['id'])
+      handleDeletePet(selectedPetId as TPetEssentials['id'])
     })
   }
 
