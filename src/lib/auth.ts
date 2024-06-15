@@ -82,10 +82,12 @@ export const config = {
         // on update (from payment page - success)
         const userEmail = token.email // unique
         const user = await getDataUser({ email: userEmail })
+        console.log('user:', user)
         if (!user) return token
 
         const hasAccess = user.hasAccess
         token.userHasAccess = hasAccess
+        console.log('token:', token)
       }
 
       return token
