@@ -1,5 +1,5 @@
 import { auth } from '@/lib/auth'
-import getPetUserIdFromPetId from '@/services/getUserIdFromPetId.service'
+import getPetUserIdFromPetId from '@/services/user/getUserIdFromPetId.service'
 import { Pet } from '@prisma/client'
 import { redirect } from 'next/navigation'
 

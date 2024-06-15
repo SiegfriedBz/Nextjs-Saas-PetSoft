@@ -1,4 +1,4 @@
-import { getUser } from '@/services/getUser.service'
+import { getUser } from '@/services/user/getUser.service'
 import z from 'zod'
 
 const schema = z.string().email()

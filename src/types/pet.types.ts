@@ -1,4 +1,4 @@
-import { Pet } from '@prisma/client'
+import type { Pet } from '@prisma/client'
 
 type TPetEssentials = Omit<Pet, 'createdAt' | 'updatedAt' | 'userId'>
 export { type TPetEssentials }

@@ -3,10 +3,19 @@
 import petDefaultImg from '@/app/pet-default.png'
 import usePetsContext from '@/hooks/usePetsContext'
 import Image from 'next/image'
+import { useEffect } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { toast } from 'sonner'
 
 const PetList = () => {
   const { pets, selectedPet, handleSelectPet } = usePetsContext()
+
+  useEffect(() => {
+    if (!pets.length) {
+      toast.info('No pets found. Add a pet to get started!')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <ul className='max-md:h-[32svh] md:h-[54svh] flex flex-col items-center overflow-y-scroll rounded-md'>

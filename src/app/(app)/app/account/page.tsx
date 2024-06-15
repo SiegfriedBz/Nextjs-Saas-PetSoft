@@ -1,7 +1,7 @@
 import ContentBlock from '@/components/ContentBlock'
 import H1 from '@/components/H1'
 import SignOutButton from '@/components/SignOutButton'
-import { checkAuth } from '@/server-utils/server.utils'
+import { checkAuth } from '@/server-utils/auth.server.utils'
 
 const Account = async () => {
   // Authentication check

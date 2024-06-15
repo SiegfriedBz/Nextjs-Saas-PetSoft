@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import userLogoutAction from '@/server-actions/userLogoutAction'
+import userLogoutAction from '@/server-actions/auth/userLogoutAction'
 import { useTransition } from 'react'
 import { toast } from 'sonner'
 

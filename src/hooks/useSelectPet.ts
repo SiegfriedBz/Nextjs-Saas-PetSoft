@@ -1,4 +1,4 @@
-import { TPetEssentials } from '@/types/pet.types'
+import type { TPetEssentials } from '@/types/pet.types'
 import { useState } from 'react'
 
 export const useSelectPet = ({ pets }: { pets: TPetEssentials[] }) => {

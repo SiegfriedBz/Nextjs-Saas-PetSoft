@@ -1,10 +1,10 @@
 'use server'
 
-import { deletePet } from '@/services/deletePet.service'
-import { checkAuth, checkIsPetOwner } from '@/server-utils/server.utils'
+import { checkAuth, checkIsPetOwner } from '@/server-utils/auth.server.utils'
+import { deletePet } from '@/services/pet/deletePet.service'
 import { deletePetSchema, type TDeletePetInput } from '@/zod/mutatePet.zod'
+import type { Pet } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
-import { Pet } from '@prisma/client'
 
 export async function deletePetAction(
   id: TDeletePetInput

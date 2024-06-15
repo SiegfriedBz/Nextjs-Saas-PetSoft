@@ -4,8 +4,8 @@ import FormError from '@/components/FormError'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import userLoginAction from '@/server-actions/userLoginAction'
-import userSignupAction from '@/server-actions/userSignupAction'
+import userLoginAction from '@/server-actions/auth/userLoginAction'
+import userSignupAction from '@/server-actions/auth/userSignupAction'
 import {
   loginZodSchema,
   signupZodSchema,
