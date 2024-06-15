@@ -7,6 +7,7 @@ const userData: Prisma.UserCreateInput = {
   email: 'anna@petsoft.com',
   hashedPassword: '',
   name: 'Anna Doe',
+  hasAccess: true,
   pets: {
     create: [
       {
