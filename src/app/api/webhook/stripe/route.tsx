@@ -39,9 +39,6 @@ export async function POST(request: NextRequest) {
       id: userId,
       hasAccess: true
     })
-
-    // TODO TODO???
-    revalidatePath('/payment')
   }
 
   // Return a 200 response to Stripe to acknowledge receipt of the event
