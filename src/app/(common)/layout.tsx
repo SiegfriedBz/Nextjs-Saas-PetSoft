@@ -1,6 +1,6 @@
 import AppFooter from '@/components/AppFooter'
-import AppHeader from '@/components/AppHeader'
 import BackgroundPattern from '@/components/BackgroundPattern'
+import ContentBlock from '@/components/ContentBlock'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
 
@@ -19,7 +19,15 @@ export default function AppLayout({
       {/* Server-Component */}
       <BackgroundPattern />
       <main className='container flex flex-col mx-auto min-h-[100svh]'>
-        <div className='mt-16 w-full h-fit max-w-5xl mx-auto'>{children}</div>
+        <div className='mt-16 w-full h-fit max-w-5xl mx-auto'>
+          <main className='h-[80svh]'>
+            <ContentBlock
+              className={`flex flex-col justify-center items-center`}
+            >
+              {children}
+            </ContentBlock>
+          </main>
+        </div>
         {/* Server-Component */}
         <AppFooter />
       </main>

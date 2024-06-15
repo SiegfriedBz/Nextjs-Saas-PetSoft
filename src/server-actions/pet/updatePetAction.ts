@@ -1,12 +1,13 @@
 'use server'
 
-import { checkAuth, checkIsPetOwner } from '@/server-utils/server.utils'
-import { updatePet } from '@/services/updatePet.service'
+import { checkAuth, checkIsPetOwner } from '@/server-utils/auth.server.utils'
+import { updatePet } from '@/services/pet/updatePet.service'
+
 import { mutatePetSchema, type TMutatePetInput } from '@/zod/mutatePet.zod'
 import { Pet } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 
-async function updatePetAction(
+export async function updatePetAction(
   updatePetInput: TMutatePetInput
 ): Promise<Pet | Error> {
   try {
@@ -47,5 +48,3 @@ async function updatePetAction(
     return err
   }
 }
-
-export default updatePetAction

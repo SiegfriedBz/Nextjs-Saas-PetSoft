@@ -1,8 +1,8 @@
 'use client'
 
-import { addPetAction } from '@/server-actions/addPetAction'
-import { deletePetAction } from '@/server-actions/deletePetAction'
-import updatePetAction from '@/server-actions/updatePetAction'
+import { addPetAction } from '@/server-actions/pet/addPetAction'
+import { deletePetAction } from '@/server-actions/pet/deletePetAction'
+import { updatePetAction } from '@/server-actions/pet/updatePetAction'
 import type { TPetEssentials } from '@/types/pet.types'
 import type { TMutatePetInput } from '@/zod/mutatePet.zod'
 import { useOptimistic } from 'react'

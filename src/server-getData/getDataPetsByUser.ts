@@ -1,5 +1,5 @@
-import { getPetsByUser } from '@/services/getPetsByUser.service'
-import { Pet } from '@prisma/client'
+import { getPetsByUser } from '@/services/pet/getPetsByUser.service'
+import type { Pet } from '@prisma/client'
 import z from 'zod'
 
 const schema = z.string()

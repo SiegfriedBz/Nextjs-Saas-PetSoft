@@ -1,9 +1,9 @@
 'use server'
 
-import userLoginAction from '@/server-actions/userLoginAction'
-import { createUser } from '@/services/createUser.service'
+import { createUser } from '@/services/user/createUser.service'
 import type { TUser } from '@/types/user.types'
 import { signupZodSchema, type TSignupInput } from '@/zod/auth.zod'
+import userLoginAction from './userLoginAction'
 
 const userSignupAction = async (userInput: TSignupInput) => {
   // 1. Data validation

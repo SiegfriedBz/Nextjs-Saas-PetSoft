@@ -1,10 +1,10 @@
 'use server'
 
-import { addPet } from '@/services/addPet.service'
-import { checkAuth } from '@/server-utils/server.utils'
+import { checkAuth } from '@/server-utils/auth.server.utils'
 import { mutatePetSchema, type TMutatePetInput } from '@/zod/mutatePet.zod'
 import { revalidatePath } from 'next/cache'
 import { Pet } from '@prisma/client'
+import { addPet } from '@/services/pet/addPet.service'
 
 export async function addPetAction(
   createPetInput: TMutatePetInput
