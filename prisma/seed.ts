@@ -11,14 +11,26 @@ const userData: Prisma.UserCreateInput = {
   pets: {
     create: [
       {
+        name: 'Anna',
+        ownerName: 'Frank Doe',
+        imageUrl:
+          'https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&q=100&w=1970&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        age: 4,
+        breed: 'Chihuahua',
+        notes:
+          "Doesn't like to be touched on the belly. Plays well with other dogs.",
+        ownerPhoneNum: '+1 234 567 8901',
+        checkInDate: '2024-06-11T12:04:48.447Z',
+        checkOutDate: '2024-09-11T12:04:48.447Z'
+      },
+      {
         name: 'Benjamin',
         ownerName: 'John Doe',
         imageUrl:
           'https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&q=100&w=1935&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         age: 2,
         breed: 'Bulldog',
-        notes:
-          "Doesn't like to be touched on the belly. Plays well with other dogs.",
+        notes: 'Allergic to chicken.',
         ownerPhoneNum: '+1 234 567 8901',
         checkInDate: '2024-06-11T12:04:48.447Z',
         checkOutDate: '2024-09-11T12:04:48.447Z'
@@ -31,18 +43,6 @@ const userData: Prisma.UserCreateInput = {
         age: 5,
         breed: 'Bulldog',
         notes: 'Needs medication twice a day.',
-        ownerPhoneNum: '+1 234 567 8901',
-        checkInDate: '2024-06-11T12:04:48.447Z',
-        checkOutDate: '2024-09-11T12:04:48.447Z'
-      },
-      {
-        name: 'Anna',
-        ownerName: 'Frank Doe',
-        imageUrl:
-          'https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&q=100&w=1970&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        age: 4,
-        breed: 'Chihuahua',
-        notes: 'Allergic to chicken.',
         ownerPhoneNum: '+1 234 567 8901',
         checkInDate: '2024-06-11T12:04:48.447Z',
         checkOutDate: '2024-09-11T12:04:48.447Z'
