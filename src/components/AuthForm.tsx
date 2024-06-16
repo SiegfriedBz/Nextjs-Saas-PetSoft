@@ -48,7 +48,7 @@ const AuthForm = ({ actionType }: TProps) => {
   })
 
   return (
-    <form action={action} className='space-y-4 w-full px-12'>
+    <form action={action} className='space-y-4 w-full max-md:px-4 md:px-12'>
       <div className='space-y-2 '>
         {!isLoginForm && (
           <div>

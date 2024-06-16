@@ -33,7 +33,7 @@ const PetList = () => {
             key={id}
             className={twMerge(
               `group w-full 
-                max-md:px-8 max-md:py-4 md:p-4
+                max-md:px-4 max-md:py-4 md:p-4
                 hover:text-zinc-500 
                 hover:bg-zinc-200/60
                 border-b border-b-zinc-200 

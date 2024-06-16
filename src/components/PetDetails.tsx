@@ -42,7 +42,7 @@ type TProps = {
 }
 const Header = ({ selectedPet }: TProps) => {
   return (
-    <div className='flex items-center max-md:px-8 max-md:py-4 md:p-4 max-md:gap-x-2'>
+    <div className='flex max-sm:flex-col max-sm:gap-y-4 sm:items-center max-md:px-4 max-md:py-4 md:p-4 max-md:gap-x-2'>
       <div className='flex items-center max-md:gap-x-2 md:gap-x-8'>
         <div className='relative rounded-full h-16 w-16 overflow-hidden'>
           <Image
@@ -55,7 +55,8 @@ const Header = ({ selectedPet }: TProps) => {
 
         <p className='text-xl '>{selectedPet.name}</p>
       </div>
-      <div className='flex ms-auto items-center gap-x-4'>
+
+      <div className='flex sm:ms-auto items-center gap-x-4'>
         <MutatePetDialog actionType='editPet' selectedPet={selectedPet} />
         <PetCheckOutActionButton selectedPetId={selectedPet.id}>
           Checkout
@@ -67,11 +68,11 @@ const Header = ({ selectedPet }: TProps) => {
 
 const Owner = ({ selectedPet }: TProps) => {
   return (
-    <div className='grid grid-cols-[1fr_4fr] py-4'>
+    <div className='grid max-sm:grid-cols-1 sm:grid-cols-[1fr_4fr] py-4'>
       <p className='text-lg uppercase'>Owner</p>
-      <div className='flex justify-around'>
-        <p className='text-center'>{selectedPet.ownerName}</p>
-        <p className='justify-center flex items-center space-x-2'>
+      <div className='flex max-sm:justify-between'>
+        <p className='sm:ms-16 md:ms-14'>{selectedPet.ownerName}</p>
+        <p className='justify-center ms-auto flex items-center space-x-2'>
           <PhoneIcon className='h-5 w-5 currentColor' />
           <span>{selectedPet.ownerPhoneNum || '000-000-0000'}</span>
         </p>
@@ -82,13 +83,13 @@ const Owner = ({ selectedPet }: TProps) => {
 
 const Pet = ({ selectedPet }: TProps) => {
   return (
-    <div className='grid grid-cols-[1fr_4fr]'>
+    <div className='grid max-sm:grid-cols-1 sm:grid-cols-[1fr_4fr]'>
       <p className='text-lg uppercase'>{selectedPet.name}</p>
-      <div className='flex justify-around'>
-        <p className='text-center'>
+      <div className='flex max-sm:justify-between'>
+        <p className='sm:ms-16 md:ms-14'>
           <span>{selectedPet.age} yo</span>
         </p>
-        <p className='text-center'>
+        <p className='ms-auto'>
           <span>{selectedPet.breed || 'Golden retriever'}</span>
         </p>
       </div>
@@ -98,16 +99,16 @@ const Pet = ({ selectedPet }: TProps) => {
 
 const Dates = ({ selectedPet }: TProps) => {
   return (
-    <div className='grid grid-cols-[1fr_4fr]'>
+    <div className='grid max-sm:gap-y-2 max-sm:grid-cols-1 sm:grid-cols-[1fr_4fr]'>
       <p className='text-lg'>
         <CalendarIcon className='h-6 w-6 currentColor' />
       </p>
-      <div className='flex justify-around'>
-        <p className='justify-center flex items-center space-x-2'>
+      <div className='flex max-sm:justify-between'>
+        <p className='sm:ms-16 md:ms-14 justify-center flex items-center space-x-2'>
           <ArrowRightStartOnRectangleIcon className='h-5 w-5 currentColor' />
           {selectedPet?.checkInDate?.toLocaleDateString()}
         </p>
-        <p className='justify-center flex items-center space-x-2'>
+        <p className='ms-auto justify-center flex items-center space-x-2'>
           <ArrowRightEndOnRectangleIcon className='h-5 w-5 currentColor' />
           {selectedPet?.checkOutDate?.toLocaleDateString()}
         </p>
@@ -118,7 +119,7 @@ const Dates = ({ selectedPet }: TProps) => {
 
 const Notes = ({ selectedPet }: TProps) => {
   return (
-    <div className='bg-zinc-50 rounded-t-md flex-1 px-4 pt-8 pb-4'>
+    <div className='bg-zinc-50 rounded-t-md flex-1 px-4 pt-8'>
       <p>{selectedPet.notes}</p>
     </div>
   )

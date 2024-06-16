@@ -1,14 +1,13 @@
-import AppHeader from '@/components/AppHeader'
 import BackgroundPattern from '@/components/BackgroundPattern'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'PetSoft - App',
+  title: 'PetSoft - Login',
   description: 'Take care of people&apos;s pets responsibly with PetSoft.'
 }
 
-export default function AppLayout({
+export default function AuthLayout({
   children
 }: Readonly<{
   children: React.ReactNode
@@ -18,9 +17,13 @@ export default function AppLayout({
       {/* Server-Component */}
       <BackgroundPattern />
       <main className='sm:container max-sm:px-2 flex flex-col mx-auto min-h-[100svh]'>
-        {/* Client-Component */}
-        <AppHeader />
-        <div className='mt-12 w-full h-fit max-w-5xl mx-auto'>{children}</div>
+        <div className='mt-8 w-full h-full max-w-5xl mx-auto'>
+          <div
+            className={`flex h-full py-4 flex-col justify-center items-center`}
+          >
+            {children}
+          </div>
+        </div>
       </main>
     </>
   )
