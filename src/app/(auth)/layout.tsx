@@ -1,6 +1,4 @@
-import AppFooter from '@/components/AppFooter'
 import BackgroundPattern from '@/components/BackgroundPattern'
-import ContentBlock from '@/components/ContentBlock'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
 
