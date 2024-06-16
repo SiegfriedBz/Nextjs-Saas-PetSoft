@@ -29,7 +29,9 @@ export async function addPetAction(
 
     revalidatePath('/app/dashboard')
 
-    return newPet
+    console.log('=== addPetAction newPet')
+
+    return JSON.parse(JSON.stringify(newPet))
   } catch (error) {
     const err = error as Error
     return err
