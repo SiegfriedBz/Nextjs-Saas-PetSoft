@@ -3,6 +3,7 @@ import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Josefin_Sans } from 'next/font/google'
 import { SessionProvider } from 'next-auth/react'
+import { Analytics } from '@vercel/analytics/react'
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
@@ -41,6 +42,7 @@ export default function RootLayout({
           <SessionProvider>{children}</SessionProvider>
         </main>
         <Toaster position='top-right' expand={false} richColors closeButton />
+        <Analytics />
       </body>
     </html>
   )
