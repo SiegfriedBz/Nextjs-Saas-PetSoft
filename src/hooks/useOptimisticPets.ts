@@ -60,8 +60,8 @@ export const useOptimisticPets = ({ pets, handleSelectPet }: TProps) => {
         toast.success(`Pet ${response.name} added successfully.`)
       }
     } catch (error) {
-      toast.error('Adding pet went wrong, please try again later.')
       console.log('ADD PET ERROR', error)
+      toast.error('Adding pet went wrong, please try again later.')
     }
   }
 
@@ -81,8 +81,8 @@ export const useOptimisticPets = ({ pets, handleSelectPet }: TProps) => {
         toast.success(`Pet ${response.name} updated successfully.`)
       }
     } catch (error) {
-      toast.error('Updating pet went wrong, please try again later.')
       console.log('UPDATE PET ERROR', error)
+      toast.error('Updating pet went wrong, please try again later.')
     }
   }
 
@@ -102,8 +102,8 @@ export const useOptimisticPets = ({ pets, handleSelectPet }: TProps) => {
         toast.success(`Pet checked out successfully.`)
       }
     } catch (error) {
-      toast.error('Checking out pet went wrong, please try again later.')
       console.log('DELETE PET ERROR', error)
+      toast.error('Checking out pet went wrong, please try again later.')
     }
   }
 
