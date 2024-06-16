@@ -41,7 +41,7 @@ export async function updatePetAction(
 
     revalidatePath('/app/dashboard')
 
-    return updatedPet
+    return JSON.parse(JSON.stringify(updatedPet))
   } catch (error) {
     console.log('updatePetAction -> error', error)
     const err = error as Error

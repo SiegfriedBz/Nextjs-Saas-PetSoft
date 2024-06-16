@@ -2,7 +2,6 @@
 
 import { checkAuth } from '@/server-utils/auth.server.utils'
 import { getStripeCheckoutSession } from '@/services/stripe/getStripeCheckoutSession.service'
-import { redirect } from 'next/navigation'
 import Stripe from 'stripe'
 
 /** Stripe */

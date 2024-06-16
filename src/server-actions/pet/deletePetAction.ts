@@ -39,7 +39,7 @@ export async function deletePetAction(
 
     revalidatePath('/app/dashboard')
 
-    return deletedPet
+    return JSON.parse(JSON.stringify(deletedPet))
   } catch (error) {
     const err = error as Error
     return err
