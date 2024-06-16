@@ -145,7 +145,9 @@ export const config = {
         (isTryingToAccessLogin || isTryingToAccessSignup)
       ) {
         console.log('4')
-        return NextResponse.redirect(new URL('/app/dashboard', request.nextUrl))
+        return NextResponse.redirect(
+          new URL('/app/dashboard', request.nextUrl.origin)
+        )
       }
 
       if (isLoggedIn && !hasAccessToApp && !isTryingToAccessApp) {
