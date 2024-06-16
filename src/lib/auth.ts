@@ -109,46 +109,63 @@ export const config = {
     authorized({ auth, request }) {
       // auth = session
       const isLoggedIn = !!auth?.user
-      const hasAccessToApp = !!auth?.user?.userHasAccess
-
+      const hasAccessToApp = auth?.user?.userHasAccess
       const isTryingToAccessApp = request.nextUrl.pathname.includes('/app')
       const isTryingToAccessLogin = request.nextUrl.pathname.includes('/login')
       const isTryingToAccessSignup =
         request.nextUrl.pathname.includes('/signup')
+      const isTryingToAccessPayment =
+        request.nextUrl.pathname.includes('/payment')
 
-      if (!isLoggedIn && isTryingToAccessApp) {
-        return false
-      }
-
-      if (!isLoggedIn && !isTryingToAccessApp) {
+      if (isTryingToAccessPayment) {
+        console.log('0')
         return true
       }
 
-      if (isLoggedIn && !isTryingToAccessApp) {
-        if (
-          !hasAccessToApp &&
-          (isTryingToAccessLogin || isTryingToAccessSignup)
-        ) {
-          /** !!! USE NEXTRESPONSE and NOT RESPONSE TO REDIRECT !!! */
-          return NextResponse.redirect(new URL('/payment', request.nextUrl))
+      if (!isLoggedIn && isTryingToAccessApp) {
+        console.log('1')
+        return false
+      }
+
+      if (isLoggedIn && !hasAccessToApp && isTryingToAccessApp) {
+        console.log('2')
+        return NextResponse.redirect(
+          new URL('/payment', request.nextUrl.origin)
+        )
+      }
+
+      if (isLoggedIn && hasAccessToApp && isTryingToAccessApp) {
+        console.log('3')
+        return true
+      }
+
+      if (
+        isLoggedIn &&
+        hasAccessToApp &&
+        (isTryingToAccessLogin || isTryingToAccessSignup)
+      ) {
+        console.log('4')
+        return NextResponse.redirect(new URL('/app/dashboard', request.nextUrl))
+      }
+
+      if (isLoggedIn && !hasAccessToApp && !isTryingToAccessApp) {
+        if (isTryingToAccessLogin || isTryingToAccessSignup) {
+          console.log('5')
+          return NextResponse.redirect(
+            new URL('/payment', request.nextUrl.origin)
+          )
         } else {
+          console.log('6')
           return true
         }
       }
 
-      if (isLoggedIn && !hasAccessToApp && isTryingToAccessApp) {
-        /** !!! USE NEXTRESPONSE and NOT RESPONSE TO REDIRECT !!! */
-        return NextResponse.redirect(new URL('/payment', request.nextUrl))
-      }
-
-      if (isLoggedIn && hasAccessToApp && !isTryingToAccessApp) {
-        return NextResponse.redirect(new URL('/app/dashboard', request.nextUrl))
-      }
-
-      if (isLoggedIn && hasAccessToApp && isTryingToAccessApp) {
+      if (!isLoggedIn && !isTryingToAccessApp) {
+        console.log('7')
         return true
       }
 
+      console.log('8')
       return false
     }
   }
