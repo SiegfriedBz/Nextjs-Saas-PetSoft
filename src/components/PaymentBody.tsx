@@ -64,8 +64,14 @@ const PaymentBody = ({
     <>
       {successPayment ? (
         <>
-          <Badge variant='default' className='text-base'>
-            Payment successful! You can now access PetSoft.
+          <Badge
+            variant='outline'
+            className='text-base text-center flex max-sm:flex-col'
+          >
+            <span>Payment successful!</span>
+            <span className='inline-block sm:ms-2'>
+              You can now access PetSoft.
+            </span>
           </Badge>
           <Button
             variant='primary'
@@ -96,7 +102,10 @@ const PaymentBody = ({
           </Button>
 
           {canceledPayment && (
-            <Badge variant='outline' className='mt-8 text-red-500 text-base'>
+            <Badge
+              variant='outline'
+              className='mt-8 text-red-500 text-base text-center'
+            >
               Payment was canceled. You can try again.
             </Badge>
           )}

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: 'Take care of people&apos;s pets responsibly with PetSoft.'
 }
 
-export default function AppLayout({
+export default function AuthLayout({
   children
 }: Readonly<{
   children: React.ReactNode
@@ -18,18 +18,14 @@ export default function AppLayout({
     <>
       {/* Server-Component */}
       <BackgroundPattern />
-      <main className='container flex flex-col mx-auto min-h-[100svh]'>
-        <div className='mt-16 w-full h-fit max-w-5xl mx-auto'>
-          <main className='h-[80svh]'>
-            <ContentBlock
-              className={`flex flex-col justify-center items-center`}
-            >
-              {children}
-            </ContentBlock>
-          </main>
+      <main className='sm:container max-sm:px-2 flex flex-col mx-auto min-h-[100svh]'>
+        <div className='mt-8 w-full h-full max-w-5xl mx-auto'>
+          <div
+            className={`flex h-full py-4 flex-col justify-center items-center`}
+          >
+            {children}
+          </div>
         </div>
-        {/* Server-Component */}
-        <AppFooter />
       </main>
     </>
   )
