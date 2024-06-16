@@ -80,14 +80,18 @@ const MutatePetForm = ({ selectedPet, closeDialog }: TProps) => {
     closeDialog()
 
     // optimistic update + server-actions
-    startTransition(() => {
-      isEditForm
-        ? handleUpdatePet(data as TMutatePetInput).catch((err: Error) =>
-            toast.error(`Failed to edit pet - ${err.message}.`)
-          )
-        : handleAddPet(data as TMutatePetInput).catch((err: Error) =>
-            toast.error(`Failed to create pet - ${err.message}.`)
-          )
+    startTransition(async () => {
+      try {
+        isEditForm
+          ? await handleUpdatePet(data as TMutatePetInput)
+          : await handleAddPet(data as TMutatePetInput)
+      } catch (error) {
+        const err = error as Error
+        console.error('Error in MutatePetForm:', err)
+        toast.error(
+          `Failed to ${isEditForm ? 'edit' : 'add'} pet - ${err.message}.`
+        )
+      }
     })
   })
 
