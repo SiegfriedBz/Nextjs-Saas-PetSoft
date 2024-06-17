@@ -2,9 +2,8 @@ import Toaster from '@/context/ToastProvider'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Josefin_Sans } from 'next/font/google'
-import { SessionProvider } from 'next-auth/react'
 import { Analytics } from '@vercel/analytics/react'
-
+import SessionProvider from '@/context/SessionProvider'
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
