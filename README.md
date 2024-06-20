@@ -104,4 +104,4 @@ To enable secure payment processing, configure the Stripe webhook to listen for 
 - **Stripe**
 
 ## Live Demo
-Visit the live demo of [PetSoft](https://next-saas-petsoft.vercel.app/)
+Visit the live demo of [PetSoft](https://next-saas-petsoft.vercel.app/) deployed on Vercel.
