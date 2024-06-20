@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# PetSoft
 
-First, run the development server:
+PetSoft is a SaaS application built on Next.js 14, utilizing the App Router and Server Actions for efficient data mutation.
+PetSoft is designed to help pet daycare businesses manage their operations efficiently.  
+Users can sign up, make a secure payment through Stripe for lifetime access, and manage their pet daycare business by adding new pets with various details.
+
+# Table of Contents
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Development Server](#running-the-development-server)
+- [Building for Production](#building-for-production)
+- [Running the Production Server](#running-the-production-server)
+- [Technologies Used](#technologies-used)
+- [Stripe Webhook](#stripe-webhook)
+- [Live Demo](#live-demo)
+
+# Prerequisites
+Stripe Account: Required for payment processing functionalities.
+
+# Installation
+Installation
+
+1. Clone the repository:
+```bash
+git clone git@github.com:SiegfriedBz/next-saas-petsoft.git
+cd petsoft
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+
+Create a .env file in the root directory and add the following environment variables
+    
+    CANONICAL_URL=http://localhost:3000
+    
+    # Next-auth
+    NEXTAUTH_URL=http://localhost:3000
+    NEXTAUTH_SECRET=your-nextauth-secret
+
+    # Stripe
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
+    STRIPE_SECRET_KEY=your-stripe-secret-key
+    STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
+    
+    # Prisma DEV
+    DATABASE_URL="file:./dev.db"
+    
+    # Prisma PRODUCTION
+    POSTGRES_URL="your-postgres-url"
+    POSTGRES_PRISMA_URL="your-postgres-prisma-url"
+    POSTGRES_URL_NO_SSL="your-postgres-url-no-ssl"
+    POSTGRES_URL_NON_POOLING="your-postgres-url-non-pooling"
+    POSTGRES_USER="your-postgres-user"
+    POSTGRES_HOST="your-postgres-host"
+    POSTGRES_PASSWORD="your-postgres-password"
+    POSTGRES_DATABASE="your-postgres-database"
+    
+    # Opengraph image
+    NEXT_PUBLIC_OG_IMAGE_URL="your-opengraph-1200x600-image" 
+
+# Running the Development Server
+To start the development server, run:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  ```
+
+# Building for Production
+To build the project for production, run:
+
+```bash
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Running the Production Server
+After building the project, you can start the production server with:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Stripe Webhook
+To enable secure payment processing, configure the Stripe webhook to listen for checkout.session.completed events. Upon successful payment completion, the user's record in the database will be updated, setting the hasAccess field to true, granting them lifetime access to the software.
 
-## Learn More
+# Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+## Frontend:
+- **Framework**: React, Next.js 14 (App Router)
+- **React Hook Form**, **Zod** (for client-side validation)
+- **Styling**: Tailwind CSS, shadcn/ui
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Backend:
+- **ORM**: Prisma
+- **Authentication**: NextAuth.js
+- **Zod** (for server-side validation)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Payment Processing:
+- **Stripe**
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Live Demo
+Visit the live demo of [PetSoft](https://next-saas-petsoft.vercel.app/)
