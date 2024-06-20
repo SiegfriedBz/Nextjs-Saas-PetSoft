@@ -96,7 +96,8 @@ To enable secure payment processing, configure the Stripe webhook to listen for 
 
 ## Backend:
 - **ORM**: Prisma
-- **Authentication**: NextAuth.js
+- **DB**: PostgreSQL
+- **Authentication**: NextAuth.js with Credentials Provider
 - **Zod** (for server-side validation)
 
 ## Payment Processing:
