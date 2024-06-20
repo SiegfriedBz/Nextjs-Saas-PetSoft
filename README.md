@@ -8,6 +8,7 @@ Users can sign up, make a secure payment through Stripe for lifetime access, and
 # Table of Contents
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
+- [Set up Prisma & Seed the database](#set-up-prisma--seed-the-database)
 - [Running the Development Server](#running-the-development-server)
 - [Building for Production](#building-for-production)
 - [Running the Production Server](#running-the-production-server)
@@ -19,7 +20,6 @@ Users can sign up, make a secure payment through Stripe for lifetime access, and
 Stripe Account: Required for payment processing functionalities.
 
 # Installation
-Installation
 
 1. Clone the repository:
 ```bash
@@ -63,6 +63,24 @@ Create a .env file in the root directory and add the following environment varia
     # Opengraph image
     NEXT_PUBLIC_OG_IMAGE_URL="your-opengraph-1200x600-image" 
 
+
+# Set up Prisma & Seed the database
+
+Initialize Prisma:
+```bash
+npx prisma init
+```
+
+Generate Prisma Client:
+```bash
+npx prisma generate
+```
+
+Seed the database:
+```bash
+npx prisma db seed
+```
+       
 # Running the Development Server
 To start the development server, run:
 
@@ -89,16 +107,18 @@ To enable secure payment processing, configure the Stripe webhook to listen for 
 
 # Technologies Used
 
-## Frontend:
 - **Framework**: React, Next.js 14 (App Router)
-- **React Hook Form**, **Zod** (for client-side validation)
+- **TypeScript**: Provides type safety and improved development experience.
+- **Zod** (for client-side and server-side validation)
+
+## Frontend:
+- **Form Handling**: React Hook Form
 - **Styling**: Tailwind CSS, shadcn/ui, responsive design
 
 ## Backend:
 - **ORM**: Prisma
 - **DB**: PostgreSQL
 - **Authentication**: NextAuth.js with Credentials Provider
-- **Zod** (for server-side validation)
 
 ## Payment Processing:
 - **Stripe**
