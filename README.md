@@ -92,7 +92,7 @@ To enable secure payment processing, configure the Stripe webhook to listen for 
 ## Frontend:
 - **Framework**: React, Next.js 14 (App Router)
 - **React Hook Form**, **Zod** (for client-side validation)
-- **Styling**: Tailwind CSS, shadcn/ui
+- **Styling**: Tailwind CSS, shadcn/ui, responsive design
 
 ## Backend:
 - **ORM**: Prisma
