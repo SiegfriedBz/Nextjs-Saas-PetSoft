@@ -59,9 +59,9 @@ export default function Home() {
             </span>
           </h1>
           <p className='self-start max-sm:max-w-[300px] max-md:max-w-sm md:max-w-xl max-sm:text-lg max-lg:text-xl md:-mt-2 md:mb-4 lg:text-2xl font-medium max-md:text-center md:text-left w-full max-md:py-2'>
-            Use <span className='text-zinc-50'>PetSoft</span> to easily keep
-            track of pets under your care.
-            <span className='ms-2'>
+            Use <span className='text-zinc-50'>PetSoft</span>
+            <span> to easily keep track of pets under your care.</span>
+            <span className='ml-2'>
               Get <span className='text-zinc-50/90'>lifetime access</span> for
               $299.
             </span>
