@@ -16,11 +16,11 @@ const AuthWrapper = ({ actionType }: TProps) => {
 
   return (
     <ContentBlock
-      className={`mx-auto w-full max-w-lg flex justify-center items-center bg-gradient-to-tr from-zinc-100 to-zinc-200
+      className={`min-h-[84svh] mx-auto w-full max-w-lg flex justify-center items-center bg-gradient-to-tr from-zinc-100 to-zinc-200
           ${isLogin ? 'h-[27rem]' : 'h-[36rem]'}`}
     >
       <ContentBlock
-        className={`my-4 sm:mx-2 flex flex-col py-2 gap-y-2 justify-center items-center
+        className={`min-h-[82svh] my-4 sm:mx-2 flex flex-col py-2 gap-y-2 justify-center items-center
             ${isLogin ? 'h-[26rem]' : 'h-[35rem]'}`}
       >
         <div className='flex flex-col gap-y-2 justify-center items-center'>
