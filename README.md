@@ -14,7 +14,7 @@ Users can sign up, make a secure payment through Stripe for lifetime access, and
 - [Running the Production Server](#running-the-production-server)
 - [Technologies Used](#technologies-used)
 - [Stripe Webhook](#stripe-webhook)
-- [Live Demo](#live-demo)
+- [Live Demo](#live-demo) 🚀
 
 # Prerequisites
 Stripe Account: Required for payment processing functionalities.
